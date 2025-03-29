@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Typing Effect</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        textarea {
+            width: 400px;
+            height: 100px;
+            font-size: 18px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Type anything slowly</h2>
+    <textarea id="fakeTextarea"></textarea>
+
+    <script>
+        const fixedText = "Tôi sai rồi tôi xin lỗi !!!"; // Dòng chữ cố định
+        let index = 0;
+        
+        document.getElementById("fakeTextarea").addEventListener("keydown", function(event) {
+            event.preventDefault(); // Chặn nhập trực tiếp
+            if (index < fixedText.length) {
+                this.value += fixedText[index]; // Thêm từng ký tự
+                index++;
+            }
+        });
+    </script>
+</body>
+</html>
