@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi cờ Caro</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .board { display: grid; grid-template-columns: repeat(3, 60px); gap: 5px; margin: 20px auto; width: 200px; }
+        .cell { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;
+                border: 2px solid black; font-size: 24px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Trò chơi cờ Caro</h2>
+    <div class="board" id="board"></div>
+    <p id="status">Lượt của: X</p>
+    <button onclick="resetGame()">Chơi lại</button>
+
+    <script>
+        let board = [
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', '']
+        ];
+        let currentPlayer = 'X';
+        const boardElement = document.getElementById("board");
+        const statusElement = document.getElementById("status");
+
+        function renderBoard() {
+            boardElement.innerHTML = '';
+            board.forEach((row, i) => {
+                row.forEach((cell, j) => {
+                    const cellElement = document.createElement("div");
+                    cellElement.classList.add("cell");
+                    cellElement.innerText = cell;
+                    cellElement.onclick = () => makeMove(i, j);
+                    boardElement.appendChild(cellElement);
+                });
+            });
+        }
+
+        function makeMove(i, j) {
+            if (board[i][j] !== '' || checkWinner()) return;
+            board[i][j] = currentPlayer;
+            renderBoard();
+            if (checkWinner()) {
+                statusElement.innerText = `Người chơi ${currentPlayer} thắng!`;
+                return;
+            }
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusElement.innerText = `Lượt của: ${currentPlayer}`;
+        }
+
+        function checkWinner() {
+            for (let i = 0; i < 3; i++) {
+                if (board[i][0] && board[i][0] === board[i][1] && board[i][1] === board[i][2]) return true;
+                if (board[0][i] && board[0][i] === board[1][i] && board[1][i] === board[2][i]) return true;
+            }
+            if (board[0][0] && board[0][0] === board[1][1] && board[1][1] === board[2][2]) return true;
+            if (board[0][2] && board[0][2] === board[1][1] && board[1][1] === board[2][0]) return true;
+            return false;
+        }
+
+        function resetGame() {
+            board = [['', '', ''], ['', '', ''], ['', '', '']];
+            currentPlayer = 'X';
+            statusElement.innerText = "Lượt của: X";
+            renderBoard();
+        }
+
+        renderBoard();
+    </script>
+</body>
+</html>
