@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2 Từ điển</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        #addWordSection {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Từ Điển Anh - Việt</h2>
+    
+    <!-- Ô nhập và nút tra cứu -->
+    <input type="text" id="searchWord" placeholder="Nhập từ tiếng Anh">
+    <button id="translateWordbutton" onclick="translateWord()">Tra cứu</button>
+    <p id="result"></p>
+
+    <!-- Khu vực thêm từ mới -->
+    <div id="addWordSection">
+        <h3>Thêm từ mới</h3>
+        <input type="text" id="newVietnameseWord" placeholder="Nhập nghĩa tiếng Việt">
+        <button onclick="themtu()">Thêm từ</button>
+        <p id="addResult"></p>
+    </div>
+
+    <script>
+        const englishWords = ["hello", "apple", "dog", "cat", "computer", "car", "love"];
+        const vietnameseWords = ["Xin chào", "Táo", "Chó", "Mèo", "Máy tính", "Ô tô", "Tình yêu"];
+        let tuthem = ""; // Biến lưu từ đang cần thêm
+
+        // Hàm tra cứu từ
+        function translateWord() {
+            let inputWord = document.getElementById("searchWord").value.trim().toLowerCase();
+            let index = englishWords.indexOf(inputWord);
+
+            if (index !== -1) {
+                document.getElementById("result").innerText = `Nghĩa: ${vietnameseWords[index]}`;
+                document.getElementById("addWordSection").style.display = "none"; // Ẩn phần thêm từ nếu tìm thấy
+            } else {
+                document.getElementById("result").innerText = "Không tìm thấy từ này!";
+                document.getElementById("addWordSection").style.display = "block"; // Hiện phần thêm từ mới
+                tuthem = inputWord; // Lưu từ cần thêm
+            }
+        }
+
+        // Hàm thêm từ mới
+        function themtu() {
+            let newVietnamese = document.getElementById("newVietnameseWord").value.trim();
+
+            if (tuthem === "" || newVietnamese === "") {
+                document.getElementById("addResult").innerText = "Vui lòng nhập nghĩa tiếng Việt!";
+                return;
+            }
+
+            // Thêm từ vào danh sách
+            englishWords.push(tuthem);
+            vietnameseWords.push(newVietnamese);
+            document.getElementById("addResult").innerText = `Đã thêm từ: "${tuthem}" - "${newVietnamese}"`;
+
+            // Xóa nội dung nhập sau khi thêm
+            document.getElementById("newVietnameseWord").value = "";
+            document.getElementById("addWordSection").style.display = "none"; // Ẩn phần thêm từ sau khi thêm xong
+        }
+    </script>
+</body>
+</html>
