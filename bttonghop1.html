@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập Mảng tổng hợp</title>
+    <script>
+        function toggleBai1() {
+            let section = document.getElementById("bai1_section");
+            section.style.display = section.style.display === "none" ? "block" : "none";
+        }
+
+        function bai1() {
+            let inputElement = document.getElementById("bai1_input");
+            let input = inputElement.value;
+            let arr = input.split(",").map(Number);
+            if (arr.length !== 10 || arr.some(isNaN)) {
+                document.getElementById("bai1_result").innerText = "Vui lòng nhập đúng 10 số nguyên, cách nhau bởi dấu phẩy.";
+                return;
+            }
+            let count = arr.filter(num => num >= 10).length;
+            document.getElementById("bai1_result").innerText = "Bài 1: Số phần tử >= 10 là " + count;
+        }
+        function bai2() {
+            let arr = [5, 12, 9, 15, 7, 20, 30, 3, 14, 10];
+            let max = Math.max(...arr);
+            let index = arr.indexOf(max);
+            document.getElementById("bai2_result").innerText= "Bài 2: Giá trị lớn nhất:" + max + "vị trí:" + index;
+        }
+
+        function bai3() {
+            let arr = [5, 12, 9, 15, 7, 20, 30, 3, 14, 10];
+            let max = Math.max(...arr);
+            let avg = arr.reduce((sum, num) => sum + num, 0) / arr.length;
+            document.getElementById("bai3_result").innerText = "Bài 3: Giá trị lớn nhất:" + max + "Giá trị trung bình:" + avg;
+        }
+
+        function bai4() {
+            let arr = [1, 2, 3, 4, 5];
+            document.getElementById("bai4_result").innerText="Bài 4: Mảng đảo ngược:" + arr.reverse();
+        }
+
+        function bai5() {
+            let str = "-5, 12, -9, 15, -7, 20";
+            let count = str.split(',').map(Number).filter(num => num < 0).length;
+            document.getElementById("bai5_result").innerText = "Bài 5: Số số nguyên âm:" + count;
+        }
+
+        function bai6() {
+            let arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+            let V = 5;
+            document.getElementById("bai6_result").innerText = `Bài 6: ${arr.includes(V) ? "V is in the array" : "V is not in the array"}`;
+
+        }
+
+        function bai7() {
+            let arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+            let V = 5;
+            let index = arr.indexOf(V);
+            if (index !== -1) {
+                arr.splice(index, 1);
+                arr.push(0);
+            }
+            document.getElementById("bai7_result").innerText = "Bài 7: Mảng sau khi xóa:" + arr;
+        }
+
+        function bai8() {
+            let arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+            document.getElementById("bai8_result").innerText= "Bài 8: Mảng giảm dần:" + arr.sort((a, b) => b - a);
+        }
+
+        function bai9() {
+            let a = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+            let b = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+            let c = b.concat(a);
+            document.getElementById("bai9_result").innerText="Bài 9: Mảng c sau khi nối:" + c;
+        }
+    </script>
+</head>
+<body>
+    <h2>Bài tập Mảng</h2>
+    <button onclick="toggleBai1()">Bài 1</button>
+    <div id="bai1_section" style="display: none;">
+        <h3>Chạy bài 1: Đếm số nguyên >= 10</h3>
+        <input type="text" id="bai1_input" placeholder="Nhập 10 số nguyên, cách nhau bởi dấu phẩy">
+        <button onclick="bai1()">Kiểm tra</button>
+        <p id="bai1_result"></p>
+    </div>
+    <br>
+    <br>
+    <button onclick="bai2()">Bài 2</button>
+    <p id="bai2_result"></p>
+    <button onclick="bai3()">Bài 3</button>
+    <p id="bai3_result"></p>
+    <button onclick="bai4()">Bài 4</button>
+    <p id="bai4_result"></p>
+    <button onclick="bai5()">Bài 5</button>
+    <p id="bai5_result"></p>
+    <button onclick="bai6()">Bài 6</button>
+    <p id="bai6_result"></p>
+    <button onclick="bai7()">Bài 7</button>
+    <p id="bai7_result"></p>
+    <button onclick="bai8()">Bài 8</button>
+    <p id="bai8_result"></p>
+    <button onclick="bai9()">Bài 9</button>
+    <p id="bai9_result"></p>
+</body>
+</html>
